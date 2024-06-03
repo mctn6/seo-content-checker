@@ -59,8 +59,6 @@ export function calculateSeoScore(
     warnings.push(
       `There should be exactly one h1 tag. Found ${h1Tags.length}.`
     );
-  } else {
-    goodPoints.push(`Exactly one h1 tag found.`);
   }
 
   // Check header structure
@@ -161,6 +159,18 @@ export function calculateSeoScore(
       `Not enough outbound links. You only have ${externalLinks.length}, try increasing it.`
     );
   }
+
+   // Image alt text check
+   const images = Array.from(doc.querySelectorAll("img"));
+   const imagesWithoutAlt = images.filter((img) => !img.getAttribute("alt"));
+   if (imagesWithoutAlt.length > 0) {
+     score -= 5;
+     warnings.push(
+       `Some images are missing alt attributes. ${imagesWithoutAlt.length} image(s) without alt text found.`
+     );
+   } else {
+     goodPoints.push(`All images have alt attributes.`);
+   }
 
   // Meta description keyword check
   if (!metaDescription.includes(keyword)) {

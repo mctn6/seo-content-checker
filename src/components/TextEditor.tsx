@@ -74,7 +74,7 @@ export default function TextEditor(props: TextEditorProps) {
                 onChange={handleChange}
                 onKeyDown={handleTabKeyPress}
                 value={previewText}
-                className="w-full h-full resize-none text-gray-900"
+                className="w-full h-screen resize-none text-gray-900"
                 placeholder="Enter your text here..."
               />
             </div>

@@ -37,7 +37,7 @@ export default function SEOButton({
 
   return (
     <Button className="w-full lg:w-fit" onClick={handleRun}>
-      Run
+      Analyze SEO Content
     </Button>
   );
 }

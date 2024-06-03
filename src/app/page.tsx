@@ -43,9 +43,9 @@ export default function Home() {
             setSubKeywords={setSubKeywords}
             setSeoResult={setSeoResult}
           />
-          {seoResult.score !== null && <SEODisplay seoResult={seoResult} />}
         </div>
       </div>
+      {seoResult.score !== null && <SEODisplay seoResult={seoResult} />}
     </Fragment>
   );
 }
