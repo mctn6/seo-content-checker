@@ -67,8 +67,8 @@ export default function TextEditor(props: TextEditorProps) {
           </button>
         </div>
         <div className="px-4 h-full">
-          <div className=" h-full flex-1">
-            <div className={` ${isPreview ? "hidden" : "block"} h-[480px] lg:h-screen`}>
+          <div className="h-full flex-1">
+            <div className={` ${isPreview ? "hidden" : "block"} lg:h-screen`}>
               <Textarea
                 id="markdown-text-editor"
                 onChange={handleChange}
