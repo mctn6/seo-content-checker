@@ -20,8 +20,6 @@ export default function Header({
   subKeywords,
   setSeoResult
 }: HeaderProps) {
-
-
   const handleRun = useCallback(() => {
     const previewElement = document.getElementById("preview");
     if (previewElement) {
@@ -33,7 +31,7 @@ export default function Header({
         subKeywords,htmlContent);
       setSeoResult(result);
     }
-  }, []);
+  }, [description, keyword, setSeoResult, subKeywords, title, url]);
   return (
     <header className="flex items-center justify-between px-4 py-3 bg-gray-900 text-white">
       <h1 className="text-lg font-bold">SEO Content Checker</h1>
