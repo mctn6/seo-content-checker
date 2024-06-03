@@ -60,38 +60,37 @@ export default function TextEditor(props: TextEditorProps) {
   return (
     <Fragment>
       <div className="h-screen">
-        <div className="flex justify-end p-4">
+        <div className="flex justify-between p-4">
+        <b>{isPreview ? "Preview" : "Markdown"}</b>
           <button onClick={() => setIsPreview(!isPreview)}>
             {isPreview ? <EyeOffIcon size={24} /> : <EyeIcon size={24} />}
           </button>
         </div>
-        {!isPreview && (
-          <div className="px-4 h-full">
-            <div className="mb-2">
-              <b>Markdown</b>
-            </div>
-            <div className="flex h-full flex-col">
+        <div className="px-4 h-full">
+      
+          <div className="relative h-full flex-1">
+            <div
+              className={`absolute inset-0 ${isPreview ? "hidden" : "block"}`}
+            >
               <Textarea
                 id="markdown-text-editor"
                 onChange={handleChange}
                 onKeyDown={handleTabKeyPress}
-                defaultValue={previewText}
-                className="flex-1 resize-none mb-6 text-gray-900"
+                value={previewText}
+                className="w-full h-full resize-none text-gray-900"
                 placeholder="Enter your text here..."
               />
             </div>
-          </div>
-        )}
-        {isPreview && (
-          <div className="px-4 h-full">
-            <div className="mb-2">
-              <b>Preview</b>
-            </div>
-            <div id="preview" className="prose h-full">
+            <div
+             id="preview"
+              className={`absolute inset-0 ${
+                isPreview ? "block" : "hidden"
+              } prose`}
+            >
               <ReactMarkdown>{previewText}</ReactMarkdown>
             </div>
           </div>
-        )}
+        </div>
       </div>
     </Fragment>
   );

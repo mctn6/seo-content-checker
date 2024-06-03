@@ -12,7 +12,7 @@ interface SnippetPreviewProps {
   url: string;
   setUrl: Function;
   keyword: string;
-  setKeywords: Function;
+  setKeyword: Function;
   subKeywords: string[];
   setSubKeywords: Function;
 }
@@ -25,7 +25,7 @@ export default function SnippetPreview({
   url,
   setUrl,
   keyword,
-  setKeywords,
+  setKeyword,
   subKeywords,
   setSubKeywords,
 }: SnippetPreviewProps) {
@@ -89,7 +89,7 @@ export default function SnippetPreview({
         </label>
         <Input
           value={keyword}
-          onChange={(e) => setKeywords(e.target.value)}
+          onChange={(e) => setKeyword(e.target.value)}
           placeholder="Enter keywords"
         />
       </div>

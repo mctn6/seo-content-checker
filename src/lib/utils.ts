@@ -37,7 +37,7 @@ export function calculateSeoScore(
   }
 
   // Check for meta description length
-  const metaDescription = description
+  const metaDescription = description;
   if (metaDescription.length < 70 || metaDescription.length > 160) {
     score -= 10;
     warnings.push(
@@ -54,7 +54,7 @@ export function calculateSeoScore(
   const h1Tags = headers.filter(
     (header) => header.tagName.toLowerCase() === "h1"
   );
-  if (h1Tags.length !== 1) {
+  if (h1Tags.length > 1) {
     score -= 10;
     warnings.push(
       `There should be exactly one h1 tag. Found ${h1Tags.length}.`
@@ -82,7 +82,8 @@ export function calculateSeoScore(
 
   // Check for keyword density
   let keywordCount = 0;
-  keywordCount = (bodyText.match(new RegExp(`\\b${keyword}\\b`, "gi")) || []).length;
+  keywordCount = (bodyText.match(new RegExp(`\\b${keyword}\\b`, "gi")) || [])
+    .length;
   const keywordDensity = (keywordCount / wordCount) * 100;
 
   if (keywordDensity < 0.5 || keywordDensity > 2.5) {
@@ -104,6 +105,14 @@ export function calculateSeoScore(
     );
   } else {
     goodPoints.push(`Content body has ${wordCount} words.`);
+  }
+
+  // Check if URL contains keyword
+  if (!url.includes(keyword)) {
+    score -= 10;
+    warnings.push("URL does not contain the keyword.");
+  } else {
+    goodPoints.push("URL contains the keyword.");
   }
 
   // Check for sub keywords

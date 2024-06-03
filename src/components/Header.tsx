@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { SeoResult, calculateSeoScore } from "@/lib/utils";
-import { useCallback, useState } from "react";
+import { calculateSeoScore } from "@/lib/utils";
+import { useCallback } from "react";
 
 interface HeaderProps {
   title: string;
@@ -9,6 +9,7 @@ interface HeaderProps {
   url: string;
   keyword: string;
   subKeywords: string[];
+  setSeoResult: Function;
 }
 
 export default function Header({
@@ -17,9 +18,8 @@ export default function Header({
   url,
   keyword,
   subKeywords,
+  setSeoResult
 }: HeaderProps) {
-
-  const [seoResult, setSeoResult] = useState<SeoResult>({ score: null, warnings: [], goodPoints: [], minorWarnings: [] });
 
 
   const handleRun = useCallback(() => {
@@ -32,7 +32,6 @@ export default function Header({
         keyword,
         subKeywords,htmlContent);
       setSeoResult(result);
-      console.log("result",result)
     }
   }, []);
   return (
