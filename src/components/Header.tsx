@@ -3,7 +3,22 @@ import { Button } from "@/components/ui/button";
 import { SeoResult, calculateSeoScore } from "@/lib/utils";
 import { useCallback, useState } from "react";
 
-export default function Header() {
+interface HeaderProps {
+  title: string;
+  description: string;
+  url: string;
+  keyword: string;
+  subKeywords: string[];
+}
+
+export default function Header({
+  title,
+  description,
+  url,
+  keyword,
+  subKeywords,
+}: HeaderProps) {
+
   const [seoResult, setSeoResult] = useState<SeoResult>({ score: null, warnings: [], goodPoints: [], minorWarnings: [] });
 
 
@@ -11,7 +26,11 @@ export default function Header() {
     const previewElement = document.getElementById("preview");
     if (previewElement) {
       const htmlContent = previewElement.innerHTML; // Extract the HTML content as a string
-      const result = calculateSeoScore(htmlContent);
+      const result = calculateSeoScore(title,
+        description,
+        url,
+        keyword,
+        subKeywords,htmlContent);
       setSeoResult(result);
       console.log("result",result)
     }
