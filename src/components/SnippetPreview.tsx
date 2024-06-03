@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { TrashIcon } from "lucide-react";
+import SEOButton from "./SEOButton";
 
 interface SnippetPreviewProps {
   title: string;
@@ -15,6 +16,7 @@ interface SnippetPreviewProps {
   setKeyword: Function;
   subKeywords: string[];
   setSubKeywords: Function;
+  setSeoResult: Function;
 }
 
 export default function SnippetPreview({
@@ -28,8 +30,8 @@ export default function SnippetPreview({
   setKeyword,
   subKeywords,
   setSubKeywords,
+  setSeoResult,
 }: SnippetPreviewProps) {
-
   const handleSubKeywordsChange = (index: number, value: string) => {
     const updatedSubKeywords = [...subKeywords];
     updatedSubKeywords[index] = value;
@@ -106,12 +108,13 @@ export default function SnippetPreview({
               placeholder="Enter sub keyword"
             />
             <Button variant="ghost" onClick={() => removeSubKeyword(index)}>
-                <TrashIcon size={16}>Remove</TrashIcon>
-              
+              <TrashIcon size={16}>Remove</TrashIcon>
             </Button>
           </div>
         ))}
-        <Button onClick={addSubKeyword} className="mt-2">Add Sub Keyword</Button>
+        <Button onClick={addSubKeyword} className="mt-2">
+          Add Sub Keyword
+        </Button>
       </div>
 
       {/* Preview Section */}
@@ -124,6 +127,17 @@ export default function SnippetPreview({
           <p className="text-green-600">{url}</p>
           <p className="text-gray-800">{description}</p>
         </div>
+      </div>
+
+      <div className="my-2 lg:flex lg:justify-end">
+        <SEOButton
+          title={title}
+          description={description}
+          url={url}
+          keyword={keyword}
+          subKeywords={subKeywords}
+          setSeoResult={setSeoResult}
+        />
       </div>
     </div>
   );

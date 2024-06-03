@@ -23,15 +23,8 @@ export default function Home() {
 
   return (
     <Fragment>
-      <Header
-        title={title}
-        description={description}
-        url={url}
-        keyword={keyword}
-        subKeywords={subKeywords}
-        setSeoResult={setSeoResult}
-      />
-      <div className="grid grid-cols-2 divide-y gap-4">
+      <Header />
+      <div className="grid grid-cols-1 lg:grid-cols-2 lg:divide-y gap-4">
         <TextEditor
           content={currentContent}
           setCurrentContent={setCurrentContent}
@@ -48,9 +41,9 @@ export default function Home() {
             setKeyword={setKeyword}
             subKeywords={subKeywords}
             setSubKeywords={setSubKeywords}
+            setSeoResult={setSeoResult}
           />
           {seoResult.score !== null && <SEODisplay seoResult={seoResult} />}
-          
         </div>
       </div>
     </Fragment>

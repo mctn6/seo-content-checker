@@ -59,19 +59,16 @@ export default function TextEditor(props: TextEditorProps) {
   };
   return (
     <Fragment>
-      <div className="h-screen">
+      <div className="">
         <div className="flex justify-between p-4">
-        <b>{isPreview ? "Preview" : "Markdown"}</b>
+          <b>{isPreview ? "Preview" : "Markdown"}</b>
           <button onClick={() => setIsPreview(!isPreview)}>
             {isPreview ? <EyeOffIcon size={24} /> : <EyeIcon size={24} />}
           </button>
         </div>
         <div className="px-4 h-full">
-      
-          <div className="relative h-full flex-1">
-            <div
-              className={`absolute inset-0 ${isPreview ? "hidden" : "block"}`}
-            >
+          <div className=" h-full flex-1">
+            <div className={` ${isPreview ? "hidden" : "block"} h-[480px] lg:h-screen`}>
               <Textarea
                 id="markdown-text-editor"
                 onChange={handleChange}
@@ -82,10 +79,8 @@ export default function TextEditor(props: TextEditorProps) {
               />
             </div>
             <div
-             id="preview"
-              className={`absolute inset-0 ${
-                isPreview ? "block" : "hidden"
-              } prose`}
+              id="preview"
+              className={`${isPreview ? "block" : "hidden"} prose`}
             >
               <ReactMarkdown>{previewText}</ReactMarkdown>
             </div>
