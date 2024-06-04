@@ -106,11 +106,15 @@ export function calculateSeoScore(
   }
 
   // Check if URL contains keyword
-  if (!url.includes(keyword)) {
-    score -= 10;
-    warnings.push("URL does not contain the keyword.");
+  if (!keyword) {
+    minorWarnings.push("Keyword is not provided.");
   } else {
-    goodPoints.push("URL contains the keyword.");
+    if (!url.includes(keyword)) {
+      score -= 10;
+      warnings.push("URL does not contain the keyword.");
+    } else {
+      goodPoints.push("URL contains the keyword.");
+    }
   }
 
   // Check for sub keywords
@@ -160,18 +164,22 @@ export function calculateSeoScore(
     );
   }
 
-   // Image alt text check
-   const images = Array.from(doc.querySelectorAll("img"));
-   const imagesWithoutAlt = images.filter((img) => !img.getAttribute("alt"));
-   if (imagesWithoutAlt.length > 0) {
-     score -= 5;
-     warnings.push(
-       `Some images are missing alt attributes. ${imagesWithoutAlt.length} image(s) without alt text found.`
-     );
-   } else {
-     goodPoints.push(`All images have alt attributes.`);
-   }
+  // Image alt text check
+  const images = Array.from(doc.querySelectorAll("img"));
+  if (images.length === 0) {
+    minorWarnings.push("No images found in the post.");
+  } else {
+    const imagesWithoutAlt = images.filter((img) => !img.getAttribute("alt"));
 
+    if (imagesWithoutAlt.length > 0) {
+      score -= 5;
+      warnings.push(
+        `Some images are missing alt attributes. ${imagesWithoutAlt.length} image(s) without alt text found.`
+      );
+    } else {
+      goodPoints.push("All images have alt attributes.");
+    }
+  }
   // Meta description keyword check
   if (!metaDescription.includes(keyword)) {
     minorWarnings.push("Meta description does not contain the keyword.");
@@ -207,5 +215,8 @@ export function calculateSeoScore(
     });
   });
 
+  if (goodPoints.length === 0){
+    score = 0;
+  }
   return { score, warnings, goodPoints, minorWarnings };
 }

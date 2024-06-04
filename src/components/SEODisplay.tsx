@@ -14,13 +14,17 @@ export default function SEODisplay({ seoResult }: SEODisplayProps) {
       <div className="grid lg:grid-cols-4 gap-4">
         <div className="mb-4">
           <h3 className="text-md font-bold text-green-600">Good Points</h3>
-          <ul className="list-disc pl-5">
-            {seoResult.goodPoints.map((point, index) => (
-              <li key={index} className="text-green-700">
-                {point}
-              </li>
-            ))}
-          </ul>
+          {seoResult.goodPoints.length > 0 ? (
+            <ul className="list-disc pl-5">
+              {seoResult.goodPoints.map((point, index) => (
+                <li key={index} className="text-green-700">
+                  {point}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-green-700">No good points.</p>
+          )}
         </div>
         <div className="mb-4">
           <h3 className="text-md font-bold text-yellow-600">Minor Warnings</h3>
