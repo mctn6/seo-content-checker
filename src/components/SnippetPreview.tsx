@@ -87,12 +87,12 @@ export default function SnippetPreview({
 
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700 mb-1">
-          Keywords
+          Keyword
         </label>
         <Input
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
-          placeholder="Enter keywords"
+          placeholder="Enter keyword"
         />
       </div>
 
